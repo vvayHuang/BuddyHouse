@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "deploy": "vite build && gh-pages -d dist",
     "test:unit": "vitest",
     "lint": "eslint . --fix",
     "format": "prettier --write src/"
@@ -14,6 +15,7 @@
   "dependencies": {
     "@headlessui/vue": "^1.7.23",
     "@heroicons/vue": "^2.2.0",
+    "gh-pages": "^6.3.0",
     "vue": "^3.5.13",
     "vue-router": "^4.4.5"
   },
