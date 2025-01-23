@@ -75,8 +75,15 @@
           </div>
         </div>
         <div class="lg:basis-1/2 md:basis-3/4">
-          <div class="max-w-4xl max-h-full hidden md:block">
-            <img class="w-full h-screen object-cover" :src="currentImage" alt="default" />
+          <div class="max-w-4xl max-h-full hidden md:block relative">
+            <transition name="fade" mode="default">
+              <img
+                :key="currentImage"
+                class="w-full h-screen object-cover absolute inset-0"
+                :src="currentImage"
+                :alt="currentImageAlt"
+              />
+            </transition>
           </div>
         </div>
       </div>
@@ -249,25 +256,52 @@ import menuImage from '@/assets/images/menu.jpg'
 import pizzaImage from '@/assets/images/pizza.jpg'
 import drinkImage from '@/assets/images/drink.jpg'
 const currentImage = ref(defaultImage)
+const currentImageAlt = ref('buddyhouse')
 
 const changeImage = (type) => {
   switch (type) {
     case 'food':
       currentImage.value = menuImage
+      currentImageAlt.value = 'menu'
       break
     case 'pizza':
       currentImage.value = pizzaImage
+      currentImageAlt.value = 'pizza'
       break
     case 'drink':
       currentImage.value = drinkImage
+      currentImageAlt.value = 'drink'
       break
 
     default:
       currentImage.value = defaultImage
+      currentImageAlt.value = 'buddyhouse'
   }
 }
 
 const resetImage = () => {
   currentImage.value = defaultImage
+  currentImageAlt.value = 'buddyhouse'
 }
 </script>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+  position: absolute;
+  inset: 0;
+}
+
+.fade-enter-from {
+  opacity: 0;
+}
+
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  transition-delay: 0.1s;
+}
+</style>
