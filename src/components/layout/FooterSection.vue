@@ -1,5 +1,6 @@
 <script setup>
 import CommonButtons from '../common/CommonButtons.vue'
+import EffectMarquee from '../EffectMarquee.vue'
 </script>
 
 <template>
@@ -50,7 +51,9 @@ import CommonButtons from '../common/CommonButtons.vue'
         ><a href="tel:0229161989">02-29161989</a></CommonButtons
       >
     </div>
+
     <div class="hidden md:block">
+      <EffectMarquee class="absolute bottom-[80px] left-0" />
       <div class="absolute top-0 right-0">
         <img class="object-cover md:w-[207px] lg:w-auto" src="@/assets/images/drum.svg" alt="" />
       </div>
