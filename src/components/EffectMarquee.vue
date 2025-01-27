@@ -1,19 +1,10 @@
 <template>
   <div class="marquee" :style="{ width: width }">
     <div ref="content" class="marquee-content">
-      <div v-for="(item, index) in texts" :key="index" class="marquee-text">
-        <template v-if="index === 0">
-          <div
-            v-for="(line, lineIndex) in item.split('\n')"
-            :key="lineIndex"
-            class="first-text-line"
-          >
-            {{ line }}
-          </div>
-        </template>
-        <template v-else>
-          {{ item }}
-        </template>
+      <div v-for="n in 10" :key="n" class="marquee-group">
+        <span class="marquee-text">
+          <slot></slot>
+        </span>
       </div>
     </div>
   </div>
@@ -24,10 +15,6 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { gsap } from 'gsap'
 
 const props = defineProps({
-  texts: {
-    type: Array,
-    default: () => ['2025 buddy house copy right', 'design by way huang'],
-  },
   width: {
     type: String,
     default: '100%',
@@ -39,26 +26,11 @@ let animation = null
 
 onMounted(() => {
   const marqueeContent = content.value
-  const containerWidth = marqueeContent.parentElement.offsetWidth
-  const textWidth = marqueeContent.offsetWidth
-  let repeats = 1
-
-  // 確保內容寬度至少是容器的兩倍
-  if (textWidth < containerWidth) {
-    repeats = Math.ceil(containerWidth / textWidth) + 1
-    const textElements = props.texts
-      .map((text) => `<span class="marquee-text">${text}</span>`)
-      .join('')
-
-    marqueeContent.innerHTML = Array(repeats).fill(textElements).join('')
-  }
-
-  // 重新計算實際的文字寬度
-  const actualTextWidth = marqueeContent.offsetWidth / repeats
+  const contentWidth = marqueeContent.offsetWidth / 10
 
   animation = gsap.to(marqueeContent, {
-    x: -actualTextWidth,
-    duration: 10,
+    x: -contentWidth,
+    duration: 15,
     repeat: -1,
     ease: 'none',
     onRepeat: () => {
@@ -83,17 +55,15 @@ onBeforeUnmount(() => {
 
 .marquee-content {
   display: inline-flex;
-  white-space: normal;
-  width: fit-content;
+  white-space: nowrap;
+  overflow: hidden;
+  gap: var(--marquee-gap, 3rem); /* 48px */
 }
 
 .marquee-text {
-  display: inline-block;
-  @apply text-body-m text-primary-on text-center;
-}
-
-.first-text-line {
-  white-space: nowrap;
-  line-height: 1.2;
+  display: inline;
+  font-size: var(--marquee-font-size, 1rem);
+  font-weight: var(--marquee-font-weight, 400);
+  @apply text-primary-on;
 }
 </style>

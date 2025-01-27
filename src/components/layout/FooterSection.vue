@@ -4,7 +4,7 @@ import EffectMarquee from '../EffectMarquee.vue'
 </script>
 
 <template>
-  <div class="lg:h-[1117px] justify-center flex items-center flex-col relative">
+  <footer class="lg:h-[1117px] justify-center flex items-center flex-col relative">
     <div class="flex flex-col md:flex-col lg:flex-row justify-center gap-12 mb-20">
       <div class="basis-auto">
         <div class="text-center text-primary-on">
@@ -52,8 +52,10 @@ import EffectMarquee from '../EffectMarquee.vue'
       >
     </div>
 
+    <EffectMarquee class="absolute bottom-[80px] left-0"
+      >2025 buddy house copy right design by way huang</EffectMarquee
+    >
     <div class="hidden md:block">
-      <EffectMarquee class="absolute bottom-[80px] left-0" />
       <div class="absolute top-0 right-0">
         <img class="object-cover md:w-[207px] lg:w-auto" src="@/assets/images/drum.svg" alt="" />
       </div>
@@ -61,5 +63,5 @@ import EffectMarquee from '../EffectMarquee.vue'
         <img class="object-cover md:w-[207px] lg:w-auto" src="@/assets/images/guitar.svg" alt="" />
       </div>
     </div>
-  </div>
+  </footer>
 </template>

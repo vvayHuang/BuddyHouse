@@ -18,25 +18,20 @@
         />
       </ul>
     </div>
+    <EffectMarquee class="drink-marquee">喝酒不開車不喝酒不開車</EffectMarquee>
   </main>
 </template>
 
-<script>
+<script setup>
+import EffectMarquee from '@/components/EffectMarquee.vue'
 import MenuCategory from '@/components/MenuCategory.vue'
 import { menu } from '@/data/drink'
-
-export default {
-  components: {
-    MenuCategory,
-  },
-  data() {
-    return {
-      menu,
-    }
-  },
-}
 </script>
 
 <style scoped>
-/* 添加你的樣式 */
+.drink-marquee {
+  --marquee-font-size: 45px; /* text-display-m 的大小 */
+  --marquee-gap: 0;
+  --marquee-font-weight: 700;
+}
 </style>
