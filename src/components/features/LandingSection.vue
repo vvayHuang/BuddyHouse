@@ -1,5 +1,5 @@
-ｚ
 <script setup>
+import BuddyHouse from '@/assets/images/BuddyHouse.vue'
 import CommonButtons from '../common/CommonButtons.vue'
 </script>
 
@@ -12,9 +12,9 @@ import CommonButtons from '../common/CommonButtons.vue'
       <img src="@/assets/images//beer.svg" alt="" />
     </div>
     <div class="flex overflow-hidden justify-center">
-      <img class="w-[168px] md:w-[300px] lg:w-auto" src="@/assets/images//buddy house.svg" alt="" />
-      <img class="w-[168px] md:w-[300px] lg:w-auto" src="@/assets/images//buddy house.svg" alt="" />
-      <img class="w-[168px] md:w-[300px] lg:w-auto" src="@/assets/images//buddy house.svg" alt="" />
+      <div class="text-primary-on"><BuddyHouse /></div>
+      <div class="text-primary-on"><BuddyHouse /></div>
+      <div class="text-primary-on"><BuddyHouse /></div>
     </div>
   </div>
   <div class="h-[812px] md:h-[1106px] lg:h-[1117px] flex flex-col justify-center relative">
