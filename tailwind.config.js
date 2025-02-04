@@ -21,6 +21,7 @@ export default {
     },
     fontFamily: {
       display: ['Markazi Text', 'serif'],
+      body: ['Noto Sans', 'serif'],
     },
     fontSize: {
       'display-lg': ['128px', { lineHeight: '1', letterSpacing: '-0.25px', fontWeight: '700' }],

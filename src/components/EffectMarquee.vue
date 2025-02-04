@@ -2,7 +2,7 @@
   <div class="marquee" :style="{ width: width }">
     <div ref="content" class="marquee-content">
       <div v-for="n in 10" :key="n" class="marquee-group">
-        <span class="marquee-text">
+        <span an class="marquee-text">
           <slot></slot>
         </span>
       </div>

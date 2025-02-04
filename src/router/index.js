@@ -32,7 +32,18 @@ const router = createRouter({
       component: () => import('../views/FAQView.vue'),
       meta: { title: '常見問題' },
     },
+    {
+      path: '/error',
+      name: 'Error',
+      component: () => import('@/views/404View.vue'),
+      meta: { title: '404 Page not Found', hideHeaderFooter: true },
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/error',
+    },
   ],
+
   //點選連結時，可以保持原本的位置在畫面上的頂部
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
