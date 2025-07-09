@@ -1,18 +1,18 @@
 <!doctype html>
 <html>
   <head>
+    <meta charset="utf-8" />
+    <title>404 Not Found</title>
     <script>
-      // 取得目前的 URL
-      const path = window.location.pathname
-      const repo = '/BuddyHouse2.0' // 請改成你的 repository 名稱
-
-      // 如果路徑不存在，重定向到 404 頁面
-      if (path.indexOf(repo) === 0) {
-        const redirectPath = path.slice(repo.length)
-        sessionStorage.redirect = redirectPath
-      }
-      window.location.href = window.location.origin + repo
+      // 取得目前的路徑，導回 index.html 並帶上 redirect 參數
+      var redirectUrl =
+        '/BuddyHouse2.0/index.html?redirect=' +
+        encodeURIComponent(location.pathname + location.search + location.hash)
+      location.replace(redirectUrl)
     </script>
   </head>
-  <body></body>
+  <body>
+    <h1>404 Not Found</h1>
+    <p>頁面不存在，正在為您導回首頁...</p>
+  </body>
 </html>
