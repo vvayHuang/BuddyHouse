@@ -1,41 +1,64 @@
-# vue-project
+# Buddy House 壹耗店 官方網站
 
-This template should help get you started developing with Vue 3 in Vite.
+本專案為「Buddy House 壹耗店」的官方網站，提供品牌介紹、完整菜單（含披薩、飲品、餐點）、常見問題、營業資訊與聯絡方式。網站設計強調視覺體驗、互動性與行動裝置友善。
 
-## Recommended IDE Setup
+## 技術架構與特色
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+### 前端框架
 
-## Customize configuration
+- **Vue 3**  
+  採用 Composition API，提升元件邏輯重用性與維護性。
+- **Vite**  
+  作為開發與建構工具，提供極速熱重載與現代前端開發體驗。
+- **Vue Router**  
+  管理多頁面路由，支援 SPA 流暢切換。
+- **Tailwind CSS**  
+  實現高度客製化的響應式設計，快速調整 UI 風格。
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+### 元件設計
 
-## Project Setup
+- **模組化元件**  
+  所有頁面皆以元件化方式開發，包含常用按鈕、導覽列、頁尾、彈窗、跑馬燈等。
+- **資料驅動**  
+  菜單、FAQ 等內容以 JS 檔案靜態管理，方便日後維護與擴充。
+- **互動設計**  
+  提供外送（Uber Eats 連結）、外帶（電話撥號）、預約（彈窗互動）等功能，提升用戶體驗。
 
-```sh
-npm install
-```
+### 版型與視覺
 
-### Compile and Hot-Reload for Development
+- **響應式設計**  
+  針對桌機、平板、手機進行優化，確保各裝置皆有良好瀏覽體驗。
+- **品牌視覺**  
+  使用自製 SVG 圖像與品牌色彩，營造獨特氛圍。
 
-```sh
-npm run dev
-```
+### 其他技術
 
-### Compile and Minify for Production
+- **ESLint + Prettier**  
+  統一程式碼風格，提升團隊協作效率。
+- **Vitest**  
+  進行單元測試，確保元件功能正確。
+- **自動化部署腳本**  
+  內建 `gh-pages` 腳本，可一鍵部署至 GitHub Pages。
 
-```sh
-npm run build
-```
+## 重要設計重點
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+- **路由設計**
+  - `/`：首頁（品牌介紹、外送/外帶入口）
+  - `/food`：餐點菜單
+  - `/pizza`：披薩專區
+  - `/drink`：飲品專區
+  - `/FAQ`：常見問題
+  - 404 頁面導向 `/error`
+- **SEO 與可存取性**
+  - 頁面標題動態切換
+  - 圖片皆有 `alt` 屬性
+  - 按鈕、連結皆有語意標籤
+- **資料維護**
+  - 菜單、FAQ 皆集中於 `src/data/`，方便非工程師維護。
 
-```sh
-npm run test:unit
-```
+## 聯絡資訊
 
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+- 地址：新北市新店區中華路79號
+- 電話：02-29161989
+- [Facebook](https://www.facebook.com/BuddyHouseOne)
+- [Instagram](https://www.instagram.com/buddyhouse01/)
