@@ -6,7 +6,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/buddyhouseV2/',
+  base: '/BuddyHouse2.0/',
   build: {
     outDir: 'dist',
   },

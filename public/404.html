@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+  <head>
+    <script>
+      // 取得目前的 URL
+      const path = window.location.pathname
+      const repo = '/BuddyHouse2.0' // 請改成你的 repository 名稱
+
+      // 如果路徑不存在，重定向到 404 頁面
+      if (path.indexOf(repo) === 0) {
+        const redirectPath = path.slice(repo.length)
+        sessionStorage.redirect = redirectPath
+      }
+      window.location.href = window.location.origin + repo
+    </script>
+  </head>
+  <body></body>
+</html>
