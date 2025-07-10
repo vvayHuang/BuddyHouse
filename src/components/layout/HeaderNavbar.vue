@@ -72,6 +72,29 @@
                 >常見問題</RouterLink
               >
             </div>
+            <div class="flex gap-2 items-center">
+              <button
+                @click="themeStore.setTheme('light')"
+                :class="theme.value === 'light' ? 'font-bold underline' : ''"
+                aria-label="亮色模式"
+              >
+                <SunIcon class="w-6 h-6" />
+              </button>
+              <button
+                @click="themeStore.setTheme('dark')"
+                :class="theme.value === 'dark' ? 'font-bold underline' : ''"
+                aria-label="暗色模式"
+              >
+                <MoonIcon class="w-6 h-6" />
+              </button>
+              <button
+                @click="themeStore.setTheme('auto')"
+                :class="theme.value === 'auto' ? 'font-bold underline' : ''"
+                aria-label="自動模式"
+              >
+                <ComputerDesktopIcon class="w-6 h-6" />
+              </button>
+            </div>
           </div>
         </div>
         <div class="lg:basis-1/2 md:basis-3/4">
@@ -213,6 +236,7 @@ import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import { DialogTitle, Listbox, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/vue'
 import { CalendarIcon, ChevronDownIcon, ClockIcon, UsersIcon } from '@heroicons/vue/20/solid'
+import { SunIcon, MoonIcon, ComputerDesktopIcon } from '@heroicons/vue/24/outline'
 
 import Logo from '@/components/common/Logo.vue'
 import IconBars3 from '@/components/icons/IconBars3.vue'
@@ -222,6 +246,8 @@ import CommonButtons from '@/components/common/CommonButtons.vue'
 import IconButtons from '@/components/common/IconButtons.vue'
 import DialogComponent from '@/components/DialogComponent.vue'
 import MenuDropdown from '@/components/MenuDropdown.vue'
+import { useThemeStore } from '@/store/theme'
+import { storeToRefs } from 'pinia'
 
 const isOpenMenu = ref(false)
 const isOpenBooking = ref(false)
@@ -283,6 +309,9 @@ const resetImage = () => {
   currentImage.value = defaultImage
   currentImageAlt.value = 'buddyhouse'
 }
+
+const themeStore = useThemeStore()
+const { theme } = storeToRefs(themeStore)
 </script>
 
 <style scoped>

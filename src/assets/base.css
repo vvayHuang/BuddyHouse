@@ -37,31 +37,28 @@
   --bh-sys-spacing-padding-600: calc(var(--bh-sys-spacing-padding-10) * 60);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bh-sys-color-primary: 144, 213, 174, 1;
-    --bh-sys-color-on-primary: 0, 56, 34, 1;
-    --bh-sys-color-primary-container: 1, 82, 52, 1;
-    --bh-sys-color-on-primary-container: 172, 242, 201, 1;
-    --bh-sys-color-secondary: 180, 204, 188, 1;
-    --bh-sys-color-on-secondary: 32, 53, 41, 1;
-    --bh-sys-color-secondary-container: 54, 75, 63, 1;
-    --bh-sys-color-on-secondary-container: 208, 232, 215, 1;
-
-    --bh-sys-color-error: 255, 180, 171, 1;
-    --bh-sys-color-on-error: 105, 0, 5, 1;
-    --bh-sys-color-error-container: 147, 0, 10, 1;
-    --bh-sys-color-on-error-container: 255, 218, 214, 1;
-    --bh-sys-color-background: 15, 21, 17, 1;
-    --bh-sys-color-on-background: 223, 228, 222, 1;
-    --bh-sys-color-surface: 15, 21, 17, 1;
-    --bh-sys-color-on-surface: 223, 228, 222, 1;
-    --bh-sys-color-surface-container: 27, 33, 29, 1;
-    --bh-sys-color-surface-variant: 64, 73, 67, 1;
-    --bh-sys-color-on-surface-variant: 192, 201, 193, 1;
-    --bh-sys-color-outline: 138, 147, 140, 1;
-    --bh-sys-color-outline-variant: 192, 201, 193, 1;
-  }
+.dark {
+  --bh-sys-color-primary: 144, 213, 174, 1;
+  --bh-sys-color-on-primary: 0, 56, 34, 1;
+  --bh-sys-color-primary-container: 1, 82, 52, 1;
+  --bh-sys-color-on-primary-container: 172, 242, 201, 1;
+  --bh-sys-color-secondary: 180, 204, 188, 1;
+  --bh-sys-color-on-secondary: 32, 53, 41, 1;
+  --bh-sys-color-secondary-container: 54, 75, 63, 1;
+  --bh-sys-color-on-secondary-container: 208, 232, 215, 1;
+  --bh-sys-color-error: 255, 180, 171, 1;
+  --bh-sys-color-on-error: 105, 0, 5, 1;
+  --bh-sys-color-error-container: 147, 0, 10, 1;
+  --bh-sys-color-on-error-container: 255, 218, 214, 1;
+  --bh-sys-color-background: 15, 21, 17, 1;
+  --bh-sys-color-on-background: 223, 228, 222, 1;
+  --bh-sys-color-surface: 15, 21, 17, 1;
+  --bh-sys-color-on-surface: 223, 228, 222, 1;
+  --bh-sys-color-surface-container: 27, 33, 29, 1;
+  --bh-sys-color-surface-variant: 64, 73, 67, 1;
+  --bh-sys-color-on-surface-variant: 192, 201, 193, 1;
+  --bh-sys-color-outline: 138, 147, 140, 1;
+  --bh-sys-color-outline-variant: 192, 201, 193, 1;
 }
 
 *,
