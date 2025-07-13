@@ -17,14 +17,11 @@ const app = createApp(App)
 
 app.use(router)
 app.use(createPinia())
-app.use(
-  VueGtag,
-  {
-    property: {
-      id: 'G-1NX2J62EV1',
-    },
-  },
-  router,
-)
+
+if (import.meta.env.PROD) {
+  app.use(VueGtag, {
+    property: { id: 'G-1NX2J62EV1' },
+  })
+}
 
 app.mount('#app')
