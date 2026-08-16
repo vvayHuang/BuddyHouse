@@ -143,7 +143,12 @@
         </div>
       </div>
       <div class="basis-1/2 w-full">
-        <Listbox v-for="item in solutions" :key="item.name" v-model="selectedOptions[item.name]">
+        <Listbox
+          v-for="item in solutions"
+          :key="item.name"
+          v-model="selectedOptions[item.name]"
+          by="value"
+        >
           <div class="relative mb-6">
             <span class="mb-2 text-label-lg inline-block text-surface-on">{{ item.name }}</span>
             <ListboxButton
@@ -153,7 +158,7 @@
                 <component :is="item.icon" class="h-5 w-5 text-surface-on" aria-hidden="true" />
               </span>
               <span class="block truncate text-surface-on">{{
-                selectedOptions[item.name] || '請選擇'
+                selectedOptions[item.name]?.label || '請選擇'
               }}</span>
               <span class="pointer-events-none absolute inset-y-0 right-3 flex items-center pr-2">
                 <ChevronDownIcon class="h-5 w-5 text-surface-on" aria-hidden="true" />
@@ -169,8 +174,8 @@
                 class="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-surface py-1 text-surface-on shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm z-10"
               >
                 <ListboxOption
-                  v-for="option in item.option"
-                  :key="option"
+                  v-for="option in item.options"
+                  :key="option.value"
                   :value="option"
                   as="template"
                   v-slot="{ active, selected }"
@@ -182,7 +187,7 @@
                     ]"
                   >
                     <span :class="[selected ? 'font-medium' : 'font-normal', 'block truncate']">
-                      {{ option }}
+                      {{ option.label }}
                     </span>
                     <span
                       v-if="selected"
@@ -199,6 +204,7 @@
           <label class="block">
             <span class="mb-2 text-label-lg inline-block text-surface-on">姓名</span>
             <input
+              v-model="form.name"
               type="text"
               class="relative w-full cursor-default rounded-lg border border-outline bg-surface py-2 px-3 text-surface-on text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-300 sm:text-sm"
               placeholder=""
@@ -207,7 +213,8 @@
           <label class="block">
             <span class="mb-2 text-label-lg inline-block text-surface-on">電子信箱</span>
             <input
-              type="text"
+              v-model="form.email"
+              type="email"
               class="relative w-full cursor-default rounded-lg border border-outline bg-surface py-2 px-3 text-surface-on text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-300 sm:text-sm"
               placeholder="example@mail.com"
             />
@@ -215,17 +222,22 @@
           <label class="block">
             <span class="mb-2 text-label-lg inline-block text-surface-on">電話</span>
             <input
-              type="text"
+              v-model="form.phone"
+              type="tel"
               class="relative w-full cursor-default rounded-lg border border-outline bg-surface py-2 px-3 text-surface-on text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-300 sm:text-sm"
               placeholder="091234567"
             />
           </label>
         </div>
+        <p v-if="submitError" class="text-heading-s text-red-600 mt-4">{{ submitError }}</p>
+        <p v-if="submitSuccess" class="text-heading-s text-green-600 mt-4">
+          預約成功，我們將盡快與您確認！
+        </p>
         <div class="py-4 flex justify-end gap-6 border-t border-outline-variant mt-6">
           <CommonButtons @click="closeBookingModal" :class="['btn-neutral']">取消</CommonButtons>
-          <CommonButtons @click="closeBookingModal" :class="['btn-primary']" :disabled="false"
-            >送出</CommonButtons
-          >
+          <CommonButtons @click="submitBooking" :class="['btn-primary']" :disabled="isSubmitting">
+            {{ isSubmitting ? '送出中...' : '送出' }}
+          </CommonButtons>
         </div>
       </div>
     </DialogComponent>
@@ -266,10 +278,35 @@ function openBookingModal() {
   isOpenBooking.value = true
 }
 
+const WEEKDAYS = ['日', '一', '二', '三', '四', '五', '六']
+
+// 產生從今天起 14 天內的可預約日期
+function buildDateOptions(days = 14) {
+  const options = []
+  const today = new Date()
+  for (let i = 0; i < days; i++) {
+    const date = new Date(today)
+    date.setDate(today.getDate() + i)
+    const value = date.toISOString().slice(0, 10)
+    const label = `${date.getMonth() + 1}/${date.getDate()} (${WEEKDAYS[date.getDay()]})`
+    options.push({ label, value })
+  }
+  return options
+}
+
+const peopleOptions = Array.from({ length: 6 }, (_, i) => ({
+  label: `${i + 1} 位`,
+  value: i + 1,
+}))
+const timeOptions = ['18:00', '18:30', '19:00', '19:30', '20:00', '20:30'].map((time) => ({
+  label: time,
+  value: time,
+}))
+
 const solutions = [
-  { name: '人數', icon: UsersIcon, option: ['1', '2', '3', '4', '5', '6'] },
-  { name: '日期', icon: CalendarIcon, option: ['12/1', '12/2', '12/3'] },
-  { name: '時間', icon: ClockIcon, option: ['18:00', '18:30', '19:00', '19:30'] },
+  { name: '人數', icon: UsersIcon, options: peopleOptions },
+  { name: '日期', icon: CalendarIcon, options: buildDateOptions() },
+  { name: '時間', icon: ClockIcon, options: timeOptions },
 ]
 
 const selectedOptions = ref({
@@ -277,6 +314,59 @@ const selectedOptions = ref({
   日期: null,
   時間: null,
 })
+
+const form = ref({ name: '', email: '', phone: '' })
+const isSubmitting = ref(false)
+const submitError = ref('')
+const submitSuccess = ref(false)
+
+function resetBookingForm() {
+  form.value = { name: '', email: '', phone: '' }
+  selectedOptions.value = { 人數: null, 日期: null, 時間: null }
+}
+
+async function submitBooking() {
+  submitError.value = ''
+  submitSuccess.value = false
+
+  const { 人數, 日期, 時間 } = selectedOptions.value
+  if (!人數 || !日期 || !時間 || !form.value.name || !form.value.email || !form.value.phone) {
+    submitError.value = '請完整填寫所有欄位'
+    return
+  }
+
+  isSubmitting.value = true
+  try {
+    const response = await fetch('/api/booking', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: form.value.name,
+        email: form.value.email,
+        phone: form.value.phone,
+        people: 人數.value,
+        date: 日期.value,
+        time: 時間.value,
+      }),
+    })
+
+    if (!response.ok) {
+      const data = await response.json().catch(() => ({}))
+      throw new Error(data.error || '送出失敗，請稍後再試')
+    }
+
+    submitSuccess.value = true
+    resetBookingForm()
+    setTimeout(() => {
+      submitSuccess.value = false
+      closeBookingModal()
+    }, 2000)
+  } catch (err) {
+    submitError.value = err.message
+  } finally {
+    isSubmitting.value = false
+  }
+}
 
 import defaultImage from '@/assets/images/default.jpg'
 import menuImage from '@/assets/images/menu.jpg'
