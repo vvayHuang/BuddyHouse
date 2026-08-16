@@ -173,6 +173,7 @@
                   :key="option"
                   :value="option"
                   as="template"
+                  v-slot="{ active, selected }"
                 >
                   <li
                     :class="[
