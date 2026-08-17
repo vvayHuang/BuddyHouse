@@ -9,13 +9,13 @@ Official marketing website for "Buddy House 壹耗店" (a restaurant/bar), built
 ## Commands
 
 ```bash
-npm run dev          # start Vite dev server (auto-opens browser)
+npm run dev          # start Vite dev server (auto-opens browser); /api/* routes will 404
+npm run dev:full     # Vite + `vercel dev` together so /api/* (e.g. booking) works locally
 npm run build         # production build to dist/
 npm run preview       # preview the production build locally
 npm run test:unit     # run Vitest unit tests
 npm run lint           # eslint . --fix
 npm run format          # prettier --write src/
-npm run deploy         # build + publish dist/ to GitHub Pages (gh-pages)
 ```
 
 Run a single test file: `npx vitest run src/components/__tests__/<file>.spec.js`
@@ -37,7 +37,7 @@ Note: `src/components/__tests__/HelloWorld.spec.js` imports a `HelloWorld.vue` c
   - other feature components (`MenuCategory`, `MenuDropdown`, `ListItem`, `DialogComponent`, `EffectMarquee`) sit directly under `src/components/`
 - **Styling**: Tailwind CSS with a heavily customized design-token config in `tailwind.config.js` (custom `screens` breakpoints, a full type scale under `fontSize` like `display-lg`/`heading-m`/`body-s`/etc., custom `fontFamily`). Prefer these existing tokens over ad-hoc values when styling.
 - **Analytics**: Google Analytics (`vue-gtag-next`) is only enabled in production builds (`import.meta.env.PROD` check in `src/main.js`); Microsoft Clarity is initialized unconditionally.
-- **Deployment**: primary deployment target is Vercel (SPA rewrite in `vercel.json` routes all paths to `index.html`); `npm run deploy` is a secondary path publishing to GitHub Pages via `gh-pages`.
+- **Deployment**: Vercel only (SPA rewrite in `vercel.json` routes all non-`/api` paths to `index.html`; `/api/*` runs as Serverless Functions). GitHub Pages is no longer used.
 
 ## Code style
 
