@@ -74,6 +74,12 @@ export default {
         DEFAULT: 'rgb(var(--bh-sys-color-outline))',
         variant: 'rgb(var(--bh-sys-color-outline-variant))',
       },
+      error: {
+        DEFAULT: 'rgb(var(--bh-sys-color-error))',
+        on: 'rgb(var(--bh-sys-color-on-error))',
+        container: 'rgb(var(--bh-sys-color-error-container))',
+        'on-container': 'rgb(var(--bh-sys-color-on-error-container))',
+      },
     },
     extend: {
       spacing: {

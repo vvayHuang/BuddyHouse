@@ -17,5 +17,13 @@ export default defineConfig({
   },
   server: {
     open: true,
+    host: '127.0.0.1',
+    proxy: {
+      // `vercel dev` run separately (see README/CLAUDE.md) serves /api/* here.
+      '/api': {
+        target: 'http://127.0.0.1:3001',
+        changeOrigin: true,
+      },
+    },
   },
 })
