@@ -6,10 +6,10 @@ import CommonButtons from '../common/CommonButtons.vue'
 <template>
   <div class="h-[812px] md:h-[1106px] lg:h-[1117px] flex flex-col justify-center relative">
     <div class="absolute top-0 left-0 -z-10 w-[327px] md:w-[584px] lg:w-auto">
-      <img src="@/assets/images/pizza.svg" alt="" />
+      <img src="@/assets/images/pizza.webp" alt="" />
     </div>
     <div class="absolute bottom-0 right-0 -z-10 w-[327px] md:w-[584px] lg:w-auto">
-      <img src="@/assets/images//beer.svg" alt="" />
+      <img src="@/assets/images/beer.svg" alt="" />
     </div>
     <div class="flex overflow-hidden justify-center">
       <div class="text-primary-on"><BuddyHouse /></div>
@@ -22,7 +22,7 @@ import CommonButtons from '../common/CommonButtons.vue'
       <h2 class="text-display-m md:text-display-lg text-primary-on">吃最飽 <br />喝最爽</h2>
     </div>
     <div class="absolute bottom-0 right-0 w-[300px] md:w-[500px] lg:w-auto">
-      <img src="@/assets/images/skateboard.svg" alt="" />
+      <img src="@/assets/images/skateboard.svg" alt="" loading="lazy" />
     </div>
   </div>
   <div class="flex flex-col justify-center items-center gap-12 md:py-20 h-[812px] md:h-auto">

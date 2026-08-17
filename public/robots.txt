@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://buddyhouse.vercel.app/sitemap.xml

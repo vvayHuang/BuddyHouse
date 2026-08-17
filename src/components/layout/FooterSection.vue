@@ -1,6 +1,8 @@
 <script setup>
 import CommonButtons from '../common/CommonButtons.vue'
 import EffectMarquee from '../EffectMarquee.vue'
+
+const currentYear = new Date().getFullYear()
 </script>
 
 <template>
@@ -53,14 +55,24 @@ import EffectMarquee from '../EffectMarquee.vue'
     </div>
 
     <EffectMarquee class="absolute bottom-[80px] left-0"
-      >2025 buddy house copy right design by way huang</EffectMarquee
+      >{{ currentYear }} buddy house copy right design by way huang</EffectMarquee
     >
     <div class="hidden md:block">
       <div class="absolute top-0 right-0">
-        <img class="object-cover md:w-[207px] lg:w-auto" src="@/assets/images/drum.svg" alt="" />
+        <img
+          class="object-cover md:w-[207px] lg:w-auto"
+          src="@/assets/images/drum.svg"
+          alt=""
+          loading="lazy"
+        />
       </div>
       <div class="absolute bottom-0 left-0">
-        <img class="object-cover md:w-[207px] lg:w-auto" src="@/assets/images/guitar.svg" alt="" />
+        <img
+          class="object-cover md:w-[207px] lg:w-auto"
+          src="@/assets/images/guitar.svg"
+          alt=""
+          loading="lazy"
+        />
       </div>
     </div>
   </footer>

@@ -12,25 +12,28 @@ const router = createRouter({
       path: '/food',
       name: 'food',
       component: () => import('../views/FoodView.vue'),
-      meta: { title: '菜單' },
+      meta: { title: '菜單', description: 'Buddy House 壹耗店美式餐點菜單，查看品項與價格。' },
     },
     {
       path: '/pizza',
       name: 'pizza',
       component: () => import('../views/PizzaView.vue'),
-      meta: { title: '披薩' },
+      meta: { title: '披薩', description: 'Buddy House 壹耗店披薩菜單，查看口味與價格。' },
     },
     {
       path: '/drink',
       name: 'drink',
       component: () => import('../views/DrinkView.vue'),
-      meta: { title: '飲品' },
+      meta: { title: '飲品', description: 'Buddy House 壹耗店酒精與飲品菜單，查看品項與價格。' },
     },
     {
       path: '/FAQ',
       name: 'FAQ',
       component: () => import('../views/FAQView.vue'),
-      meta: { title: '常見問題' },
+      meta: {
+        title: '常見問題',
+        description: 'Buddy House 壹耗店常見問題，訂位、低消與現場資訊。',
+      },
     },
     {
       path: '/error',
@@ -57,6 +60,10 @@ const router = createRouter({
 router.beforeEach((to) => {
   document.title =
     to.meta.title !== undefined ? `${to.meta.title} - Buddy House 壹耗店` : `Buddy House 壹耗店`
+
+  if (to.meta.description) {
+    document.querySelector('meta[name="description"]')?.setAttribute('content', to.meta.description)
+  }
 })
 
 export default router
